@@ -19,6 +19,7 @@ namespace DemoExam.WinForm
                 .AddTransient<CreateUser>()
                 .BuildServiceProvider();
             
+
             ApplicationConfiguration.Initialize();
             Application.Run(services.GetRequiredService<AuthForm>());
         }
