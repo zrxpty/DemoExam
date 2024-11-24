@@ -1,15 +1,6 @@
 ﻿using DemoExam.WinForm.Data.Models;
 using DemoExam.WinForm.Features.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
 namespace DemoExam.WinForm.Forms
 {
     public partial class UsersForm : Form
@@ -19,6 +10,10 @@ namespace DemoExam.WinForm.Forms
         private IUserService _userService;
         private CreateUser _createUser;
 
+        private int _pageSize = 5;
+        private int _currentPage = 1;
+        private int _totalPages;
+
         public UsersForm(IUserService userService, CreateUser createUser)
         {
             _userService = userService;
@@ -26,20 +21,7 @@ namespace DemoExam.WinForm.Forms
 
             InitializeComponent();
             FeelDataGrid();
-
-        }
-
-        private void FeelDataGrid()
-        {
-            UsersDataGrid.DataSource = null;
-            var users = _userService.GetUsers();
-
-            //foreach (var user in users)
-            //{
-            //    UsersDataGrid.Rows.Add(user.Id, user.Name, user.Email, user.Password);
-            //}
-
-            UsersDataGrid.DataSource = users.ToList();
+            InitializePageSizeComboBox();
         }
 
         private void UsersDataGrid_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -50,11 +32,6 @@ namespace DemoExam.WinForm.Forms
 
                 currentUser = selectedUser;
             }
-        }
-
-        private void UsersForm_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void DeleteUserButton_Click(object sender, EventArgs e)
@@ -70,11 +47,6 @@ namespace DemoExam.WinForm.Forms
             FeelDataGrid();
         }
 
-        private void CreateUserButtom_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void CreateUserButtom_Click_1(object sender, EventArgs e)
         {
             this.Hide();
@@ -84,6 +56,61 @@ namespace DemoExam.WinForm.Forms
         private void UsersForm_Shown(object sender, EventArgs e)
         {
             FeelDataGrid();
+        }
+
+        private void pageSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _pageSize = (int)pageSizeComboBox.SelectedItem;
+            _currentPage = 1;
+            FeelDataGrid();
+        }
+
+        private void InitializePageSizeComboBox()
+        {
+            pageSizeComboBox.DataSource = new List<int> { 3, 5, 10, 15, 20 };
+            pageSizeComboBox.SelectedIndexChanged += pageSizeComboBox_SelectedIndexChanged;
+            pageSizeComboBox.SelectedItem = _pageSize;
+        }
+
+        private void FeelDataGrid()
+        {
+            UsersDataGrid.DataSource = null;
+
+
+            var users = _userService.GetUsers();
+
+            _totalPages = (int)Math.Ceiling((double)users?.Count() / _pageSize);
+
+            var pagedUsers = users
+                            .Skip((_currentPage - 1) * _pageSize)
+                            .Take(_pageSize)
+                            .ToList();
+
+            UsersDataGrid.DataSource = pagedUsers;
+            UpdatePaginationInfo();
+        }
+
+        private void UpdatePaginationInfo()
+        {
+            paginationLabel.Text = $"Страница {_currentPage} из {_totalPages}";
+        }
+
+        private void NextPrevButton_Click_1(object sender, EventArgs e)
+        {
+            if (_currentPage < _totalPages)
+            {
+                _currentPage++;
+                FeelDataGrid();
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (_currentPage > 1)
+            {
+                _currentPage--;
+                FeelDataGrid();
+            }
         }
     }
 }

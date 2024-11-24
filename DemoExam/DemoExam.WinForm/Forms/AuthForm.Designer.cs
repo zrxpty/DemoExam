@@ -46,7 +46,6 @@
             captchaBox.Size = new Size(150, 50);
             captchaBox.TabIndex = 0;
             captchaBox.TabStop = false;
-            captchaBox.Click += captchaBox_Click;
             // 
             // LoginButton
             // 
@@ -121,7 +120,6 @@
             Controls.Add(captchaBox);
             Name = "AuthForm";
             Text = "AuthForm";
-            Load += AuthForm_Load;
             ((System.ComponentModel.ISupportInitialize)captchaBox).EndInit();
             ResumeLayout(false);
             PerformLayout();

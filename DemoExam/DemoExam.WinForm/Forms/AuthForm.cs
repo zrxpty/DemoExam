@@ -27,11 +27,6 @@ namespace DemoExam.WinForm.Forms
             captchaBox.Image = GenerateCaptcha.GenerateCaptchaImage(_captchatext, captchaBox.Width, captchaBox.Height);
         }
 
-        private void AuthForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             var login = LoginTextBox.Text;
@@ -57,11 +52,6 @@ namespace DemoExam.WinForm.Forms
 
             _usersForm.Show();
             this.Hide();
-        }
-
-        private void captchaBox_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

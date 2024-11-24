@@ -21,7 +21,7 @@ namespace DemoExam.WinForm
             
 
             ApplicationConfiguration.Initialize();
-            Application.Run(services.GetRequiredService<AuthForm>());
+            Application.Run(services.GetRequiredService<UsersForm>());
         }
     }
 }

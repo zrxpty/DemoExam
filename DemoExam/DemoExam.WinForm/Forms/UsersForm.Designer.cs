@@ -38,6 +38,11 @@
             nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             UsersDataGrid = new DataGridView();
+            pageSizeComboBox = new ComboBox();
+            label1 = new Label();
+            NextPrevButton = new Button();
+            button1 = new Button();
+            paginationLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)userBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)UsersDataGrid).BeginInit();
             SuspendLayout();
@@ -108,26 +113,80 @@
             UsersDataGrid.Location = new Point(12, 34);
             UsersDataGrid.Name = "UsersDataGrid";
             UsersDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            UsersDataGrid.Size = new Size(688, 404);
+            UsersDataGrid.Size = new Size(688, 345);
             UsersDataGrid.TabIndex = 0;
             UsersDataGrid.CellMouseClick += UsersDataGrid_CellMouseClick;
+            // 
+            // pageSizeComboBox
+            // 
+            pageSizeComboBox.FormattingEnabled = true;
+            pageSizeComboBox.Location = new Point(137, 401);
+            pageSizeComboBox.Name = "pageSizeComboBox";
+            pageSizeComboBox.Size = new Size(81, 23);
+            pageSizeComboBox.TabIndex = 4;
+            pageSizeComboBox.SelectedIndexChanged += pageSizeComboBox_SelectedIndexChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(27, 404);
+            label1.Name = "label1";
+            label1.Size = new Size(104, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Размер страницы";
+            // 
+            // NextPrevButton
+            // 
+            NextPrevButton.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            NextPrevButton.Location = new Point(619, 399);
+            NextPrevButton.Name = "NextPrevButton";
+            NextPrevButton.Size = new Size(28, 39);
+            NextPrevButton.TabIndex = 6;
+            NextPrevButton.Text = ">";
+            NextPrevButton.UseVisualStyleBackColor = true;
+            NextPrevButton.Click += NextPrevButton_Click_1;
+            // 
+            // button1
+            // 
+            button1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            button1.Location = new Point(403, 399);
+            button1.Name = "button1";
+            button1.Size = new Size(28, 39);
+            button1.TabIndex = 7;
+            button1.Text = "<";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click_1;
+            // 
+            // paginationLabel
+            // 
+            paginationLabel.AutoSize = true;
+            paginationLabel.Location = new Point(488, 414);
+            paginationLabel.Name = "paginationLabel";
+            paginationLabel.Size = new Size(38, 15);
+            paginationLabel.TabIndex = 8;
+            paginationLabel.Text = "label2";
             // 
             // UsersForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(986, 450);
+            Controls.Add(paginationLabel);
+            Controls.Add(button1);
+            Controls.Add(NextPrevButton);
+            Controls.Add(label1);
+            Controls.Add(pageSizeComboBox);
             Controls.Add(DeleteUserButton);
             Controls.Add(EditUserButton);
             Controls.Add(CreateUserButtom);
             Controls.Add(UsersDataGrid);
             Name = "UsersForm";
             Text = "UsersForm";
-            Load += UsersForm_Load;
             Shown += UsersForm_Shown;
             ((System.ComponentModel.ISupportInitialize)userBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)UsersDataGrid).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -140,5 +199,10 @@
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridView UsersDataGrid;
+        private ComboBox pageSizeComboBox;
+        private Label label1;
+        private Button NextPrevButton;
+        private Button button1;
+        private Label paginationLabel;
     }
 }
