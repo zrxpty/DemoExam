@@ -1,4 +1,6 @@
-﻿namespace DemoExam.WinForm.Features.Utils
+﻿
+
+namespace DemoExam.WinForm.Features.Utils
 {
     internal static class GenerateCaptcha
     {

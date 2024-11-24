@@ -1,9 +1,6 @@
 ﻿using DemoExam.WinForm.Data;
-using DemoExam.WinForm.Data.Models;
 using DemoExam.WinForm.Features.Interfaces;
 using DemoExam.WinForm.Features.Utils;
-using Microsoft.VisualBasic.ApplicationServices;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace DemoExam.WinForm.Features.Services
 {
